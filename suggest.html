@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Treeky Suggestions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/supah/pen/WwrJpw?limit=all&page=86&q=box" />
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header id="header">
+    <div class="container">
+        <div id="logo" class="pull-left">
+            <a href="#intro"><img src="https://lh3.googleusercontent.com/proxy/b24ZCcwcNseJJ2Y4_FRRMX2_CX-npfyTKY7DxuwBDxqEpkMsnUKL62rwMw74MqrlhHNI0FbIFfmvHnZHylznf-jz6Ecz0ioAF7wCMCnq" alt="" title=""></a>
+        </div>
+        <nav id="nav-menu-container" style="float: right">
+            <ul class="nav nav-pills">
+                <li  class="active"><a href="#about"> Suggestions</a></li>
+                <li><a href="album.html"> Tree Album</a></li>
+                <li><a href="#know"> Profile</a></li>
+                <li><a href="index.html"> Log Out</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+    
+<section id="about" class="section-bg">
+    <div class="container">
+        <div class="row"  id="leaderbd" style="padding: 100px; margin-top: 70px;">
+            <div class="hero-text col-md-12" style="display: flex;justify-content: center;align-items: center; flex-direction: column;">
+                <h1 style="font-size: 40px; text-align: center; font-weight: bolder; padding: 10px;">Treeky</h1>
+                <p style="font-weight: bolder; text-align: center; margin-bottom: 10px;">Choose location from the map to get Suggestions</p>
+                <button class="button button4 map-button" >View Maps</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 80px;">
+                    <div id="Map" style="height: 500px;  width: 900px; padding: 80px;" ></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">  
+                <p id="info1"></p>
+                <p id="info2"></p>
+            </div>
+        </div>
+    </div>
+</section>
+       
+<script>
+        var map,vectorLayer,selectMarkerControl,selectedFeature;
+        var lat =   10.8505;
+        var lon            =    76.2711;
+        var zoom        =   8;
+        var curpos = new Array();
+        var position;
+
+        var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+        var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+
+        var cntrposition       = new OpenLayers.LonLat(lon, lat).transform( fromProjection, toProjection);
+
+        function init()
+        {
+            console.log('clicked');
+            
+                map = new OpenLayers.Map("Map",{
+                            controls: 
+                            [
+                                        new OpenLayers.Control.PanZoomBar(),                        
+                            new OpenLayers.Control.LayerSwitcher({}),
+                            new OpenLayers.Control.Permalink(),
+                            new OpenLayers.Control.MousePosition({}),
+                            new OpenLayers.Control.ScaleLine(),
+                            new OpenLayers.Control.OverviewMap(),
+                                    ]
+                              }
+                                );
+                var mapnik      = new OpenLayers.Layer.OSM("MAP"); 
+                var markers     = new OpenLayers.Layer.Markers( "Markers" );
+
+            map.addLayers([mapnik,markers]);
+            map.addLayer(mapnik);
+            map.setCenter(cntrposition, zoom);
+
+            markers.addMarker(new OpenLayers.Marker(cntrposition));
+
+            var click = new OpenLayers.Control.Click();
+            map.addControl(click);
+
+            click.activate();
+};
+OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {               
+ defaultHandlerOptions: {
+  'single': true,
+  'double': false,
+  'pixelTolerance': 0,
+  'stopSingle': false,
+  'stopDouble': false
+ },
+
+ initialize: function(options) {
+  this.handlerOptions = OpenLayers.Util.extend(
+   {}, this.defaultHandlerOptions
+  );
+  OpenLayers.Control.prototype.initialize.apply(
+   this, arguments
+  );
+  this.handler = new OpenLayers.Handler.Click(
+   this, {
+    'click': this.trigger
+   }, this.handlerOptions
+  );
+ },
+
+    trigger: function(e) {  
+    var lonlat = map.getLonLatFromPixel(e.xy);
+    lonlat1= new OpenLayers.LonLat(lonlat.lon,lonlat.lat).transform(toProjection,fromProjection);
+    var lat = lonlat1.lon.toFixed(2);
+    var lon = lonlat1.lat.toFixed(2);
+
+    var table1 = '<h2 style="font-size: 40px; text-align: center; font-weight: bolder; padding: 10px; margin-bottom: 30px;">Map Coordinates </h2><table style="margin: 50px;padding: 10px;"><tr><td>Latitude  : </td><td id="lat"></td></tr><tr><td>Longitude  : </td><td id="lon"></td></tr></table><button style="margin: 50px;padding: 10px;align-items: center; " class="button button4" onclick="getInfo()">Get Suggestions</button>'
+
+    document.getElementById("info1").innerHTML = table1;
+
+    document.getElementById("lat").innerHTML = (lat + "°  ");
+    document.getElementById("lon").innerHTML = (lon + "°  ");
+
+    }
+});
+
+    // fetch("http:")
+    var table2 = '<h2 style="font-size: 40px; text-align: center; font-weight: bolder; padding: 10px; margin-bottom: 30px;">Information Obtained : </h2><table style="margin: 50px;padding: 10px;"><tr><td>Soil Information  : </td><td id="soil"></td></tr><tr><td>Suggested Plant 1 : </td><td id="plant1"></td></tr><tr><td>Suggested Plant 2 : </td><td id="plant2"></td></tr><tr><td>Suggested Plant 3 : </td><td id="plant3"></td></tr></table>'
+
+    function getInfo()  {
+    document.getElementById("info2").innerHTML = table2;
+    }
+
+    document.querySelector('button.button4.map-button').addEventListener('click', () => {
+       
+    })
+
+    init();
+</script>
+
+        
+</body>
+</html>

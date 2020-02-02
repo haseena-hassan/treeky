@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Treeky</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/supah/pen/WwrJpw?limit=all&page=86&q=box" />
+
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header id="header">
+    <div class="container">
+        <div id="logo" class="pull-left">
+            <a href="#intro"><img src="https://lh3.googleusercontent.com/proxy/b24ZCcwcNseJJ2Y4_FRRMX2_CX-npfyTKY7DxuwBDxqEpkMsnUKL62rwMw74MqrlhHNI0FbIFfmvHnZHylznf-jz6Ecz0ioAF7wCMCnq" alt="" title=""></a>
+        </div>
+        <nav id="nav-menu-container" style="float: right">
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#about" onclick="cancelForm()">Home</a></li>
+                <li><a href="#know"> About</a></li>
+                <li><a href="#login" onclick="openForm()">Login</a></li>
+                <li><a href="#sign" onclick="signupForm()">Sign Up</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+    
+<section id="about" class="section-bg">
+    <div class="container">
+        <div class="row"  id="leaderbd" style="padding: 100px; margin-top: 100px;">
+            <div class="hero-text col-md-4" style="display: flex;justify-content: center;align-items: center; flex-direction: column;">
+                <h1 style="font-size: 40px; text-align: center; font-weight: bolder; padding: 10px;">Treeky</h1>
+                <p style="font-weight: bolder; text-align: center; margin-bottom: 10px;">Lets plant some Trees</p>
+                <button class="button button4">Plant Trees</button>
+            </div>
+            <div class=" col-md-8">
+                <div class="leaderboard">
+                    <h1>leaderboard</h1>
+                    <ol>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="login" style="display: none; padding-left: 300px;">
+            <div class="form col-md-12">
+                
+                <form action="/action_page.php" class="form-container">
+            
+                <label for="email"><b>Adhar No</b></label>
+                <input type="text" placeholder="Enter Adhar" name="email" required>
+            
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+            
+                <button type="submit" class="btn"><a href="suggest.html">Login</a> </button>
+                <button type="button" class="btn cancel" onclick="cancelForm()">Cancel</button>
+                </form>
+            </div>
+        </div>
+        <div class="row" id="signup" style="display: none; padding-left: 300px;">
+            <div class="form col-md-12">  
+                <form action="/action_page.php" class="form-container">
+                
+                <label for="text"><b>Name</b></label>
+                <input type="text" placeholder="Enter Name" name="email" required>
+
+                <label for="email"><b>Adhar No</b></label>
+                <input type="text" placeholder="Enter Adhar" name="email" required>
+            
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <label for="psw"><b>Confirm Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+            
+                <button type="submit" class="btn">Submit</button>
+                <button type="button" class="btn cancel" onclick="cancelForm">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+       
+<section id="know" class="section-bg">
+    <div class="container">
+        <div class="row"  id="ngo" style="padding: 100px; margin-top: 80px;">
+            <div class="hero-text col-md-8" style="display: flex;justify-content: center;align-items: center; flex-direction: column;">
+                <h1 style="font-size: 40px; text-align: center; font-weight: bolder; padding: 10px; margin-bottom: 50px;">About</h1>
+                <p>Trees are an important part of every community. Our streets, parks, playgrounds and backyards are lined with trees that create a peaceful, aesthetically pleasing environment. Trees increase our quality of life by bringing natural elements and wildlife habitats into urban settings. We gather under the cool shade they provide during outdoor activities with family and friends. Many neighborhoods are also the home of very old trees that serve as historic landmarks and a great source of town pride.</p>
+                <br>
+                <p>Trees are an important part of every community. Our streets, parks, playgrounds and backyards are lined with trees that create a peaceful, aesthetically pleasing environment. Trees increase our quality of life by bringing natural elements and wildlife habitats into urban settings. We gather under the cool shade they provide during outdoor activities with family and friends. Many neighborhoods are also the home of very old trees that serve as historic landmarks and a great source of town pride.</p>
+            </div>
+            <div class="hero-text col-md-4 pull-right" id="logo" style="display: flex;justify-content: center;align-items: center; flex-direction: column;">    
+                <img src="download.png" >
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+        function openForm() {
+          document.getElementById("login").style.display = "block";
+          document.getElementById("leaderbd").style.display = "none";
+          document.getElementById("signup").style.display = "none";
+        }
+        function signupForm() {
+            document.getElementById("signup").style.display = "block";
+            document.getElementById("login").style.display = "none";
+            document.getElementById("leaderbd").style.display = "none";
+        }
+        function cancelForm() {
+            document.getElementById("signup").style.display = "none";
+            document.getElementById("login").style.display = "none";
+            document.getElementById("leaderbd").style.display = "block";
+        }
+
+    fetch("http://treeky.herokuapp.com/leaderboard/planters")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        const list = data.leaderboard.splice(0,5).map(item => {
+            return `<li>
+                        <mark>${item.name}</mark>
+                        <small>${item.earning}</small>
+                        </li>`
+        });
+        document.querySelector('.leaderboard>ol').innerHTML = list.join('');
+
+    })
+
+</script>
+        
+</body>
+</html>

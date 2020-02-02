@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Treeky Suggestions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/supah/pen/WwrJpw?limit=all&page=86&q=box" />
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header id="header">
+    <div class="container">
+        <div id="logo" class="pull-left">
+            <a href="#intro"><img src="https://lh3.googleusercontent.com/proxy/b24ZCcwcNseJJ2Y4_FRRMX2_CX-npfyTKY7DxuwBDxqEpkMsnUKL62rwMw74MqrlhHNI0FbIFfmvHnZHylznf-jz6Ecz0ioAF7wCMCnq" alt="" title=""></a>
+        </div>
+        <nav id="nav-menu-container" style="float: right">
+            <ul class="nav nav-pills">
+                <li><a href="#about"> Suggestions</a></li>
+                <li class="active"><a href="#know"> Tree Album</a></li>
+                <li><a href="#know"> Profile</a></li>
+                <li><a href="#know"> Log Out</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+    
+<section id="about" class="section-bg">
+    <div class="container">
+        <div class="row"  id="leaderbd" style="padding: 100px; margin-top: 70px;">
+            <div class="hero-text col-md-12" style="display: flex;justify-content: center;align-items: center; flex-direction: column;">
+                <h1 style="font-size: 40px; text-align: center; font-weight: bolder; padding: 10px;">Treeky</h1>
+                <p style="font-weight: bolder; text-align: center; margin-bottom: 10px;">View trees album from the plantation</p>
+                <button class="button button4 map-button" onclick="viewAlbum()">View Album</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin: 80px;">
+                <div class="cards">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+       
+<script>
+   function viewAlbum() {
+       var x = ''
+        document.getElementById("album").innerHTML = x;
+   }
+
+   fetch("http://treeky.herokuapp.com/treealbum")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        const list = data.treealbum.splice(0,3).map(item => {
+            return `<img src="download.png">`
+        });
+        document.querySelector('.cards>div').innerHTML = list;
+
+    })
+
+   
+</script>
+
+        
+</body>
+</html>
